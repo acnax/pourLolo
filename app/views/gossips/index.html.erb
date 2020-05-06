@@ -1,0 +1,33 @@
+<div class='container'>
+    <div class='row px-5 py-2 mb-3'>
+        	<p class='h2 text-white'>Salut <%= @first_name %>, voici les derniers potins</p>  
+    </div>
+
+    <div class='row'>
+        <div class='mt-5 col-3'>
+            <div class='d-flex justify-content-center'>
+                <%= link_to "Creer un Gossip", new_gossip_path, class: "btn btn-primary btn-lg text-white rounded-pill" %>
+            </div>
+        </div>
+        <div class='col-8 mb-5 border-left border-primary'>
+        	<% @gossip.each do |gossip| %>
+        		<div class="card mt-5 mx-auto border-primary rounded-lg" style="width: 35rem;">
+          			<div class="card-body">
+            			<h5 class="card-title"><%= gossip.title %></h5>
+            			<p class="card-text">From <%= gossip.user.first_name %>, <%= gossip.user.last_name %><br/>
+            			<span class='text-muted'>			
+            			<% gossip.tags.each do |tag| %>
+            				#<%= tag.title %>
+            			<% end %>
+            			</span>
+            			</p>
+            			
+            			<%= link_to "la suite", gossip_path(gossip.id), class: "btn btn-primary text-white rounded-pill" %>
+          			</div>
+        		</div>
+
+        	<% end %>
+
+        </div>
+    </div>
+</div>

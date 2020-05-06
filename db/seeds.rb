@@ -22,5 +22,5 @@ Tag.destroy_all
 end
 
 20.times do
-	Gossip.create!(title: Faker::Lorem.sentence(word_count: 4), content: Faker::Lorem.sentence(word_count: 30), user: User.find(rand(User.first.id..User.last.id)), tags: [Tag.find(rand(Tag.first.id..Tag.last.id)), Tag.find(rand(Tag.first.id..Tag.last.id))])	
+	Gossip.create!(title: Faker::Lorem.sentence(word_count: 2), content: Faker::Lorem.sentence(word_count: 30), user: User.find(rand(User.first.id..User.last.id)), tags: [Tag.find(rand(Tag.first.id..Tag.last.id)), Tag.find(rand(Tag.first.id..Tag.last.id))])	
 end
