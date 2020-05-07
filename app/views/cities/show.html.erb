@@ -1,0 +1,30 @@
+<div class='pt-5 container'>
+
+	<div class="my-3 row">
+	  <div class="h4 font-weight-bold col-8 text-white text-center">
+	  	Les potins de <span class='text-primary'><%= @city.name %></span>
+	  </div>
+	  
+	</div>
+	<div class="row">
+		<div class='col-md-6 offset-md-3 pb-4 '>
+			<% @city.users.each do |user|
+				user.gossips.each do |gossip| %>
+					<div class="card mt-5 border-primary rounded-lg" >
+		          			<div class="card-body">
+		            			<h5 class="card-title">
+		            				<%=link_to gossip.title, gossip_path(gossip.id), class: 'text-decoration-none' %></h5>
+		            			<p class="card-text">From <%= gossip.user.first_name %>, <%= gossip.user.last_name %><br/>
+		            			<span class='text-info'>			
+		            			<% gossip.tags.each do |tag| %>
+		            				#<%= tag.title %>
+		            			<% end %>
+		            			</span>
+		            			</p>
+		          			</div>
+		       </div>
+		    <% end %>
+		  <% end %>
+		</div>
+  </div>
+</div>

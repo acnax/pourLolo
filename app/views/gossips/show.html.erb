@@ -11,7 +11,8 @@
 		    	<%= link_to 'De ' + @gossip.user.first_name +  ' ' + @gossip.user.last_name, 
 		    	user_path(@user_id) %><br />
 
-		    	<%= @gossip.created_at.strftime('%d/%m/%Y  -  %H:%M ') %>
+		    	<%= @gossip.created_at.strftime('%d/%m/%Y  -  %H:%M ') + ' à ' %>
+		    	<%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id), class: 'text-dark text-decoration-none' %>
 		    </p>
 
 		    <p class="card-text text-info">

@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
 	resources :users
 
+	resources :cities
+
 	#get '/welcome(/:first_name)', to: "dynamic_pages#welcome", as: 'welcome'
 
 	#get '/gossip/:gossip_id', to: "dynamic_pages#show", as: 'show'

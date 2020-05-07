@@ -1,6 +1,6 @@
 <div class='container'>
     <div class='row px-5 py-4 mb-3'>
-        	<p class='h2 text-white'>Salut <%= @first_name %>, voici les derniers potins</p>  
+        	<p class='h2 text-white'>Salut <%= @first_name %>, voici les derniers <span class='text-primary'>potins</span></p>  
     </div>
 
     <div class='row justify-content-center'>
@@ -15,7 +15,7 @@
           			<div class="card-body">
             			<h5 class="card-title"><%= gossip.title %></h5>
             			<p class="card-text">From <%= gossip.user.first_name %>, <%= gossip.user.last_name %><br/>
-            			<span class='text-muted'>			
+            			<span class='text-info'>			
             			<% gossip.tags.each do |tag| %>
             				#<%= tag.title %>
             			<% end %>
