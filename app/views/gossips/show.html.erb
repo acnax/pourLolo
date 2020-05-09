@@ -1,26 +1,75 @@
 <div class='container'>
-	<div class='mt-5  mx-auto d-flex justify-content-center'>
-		<div class="card">
-		  <div class="h4 card-header">
-		    <%= @gossip.title %> 
-		  </div>
-		  <div class="card-body">
-		    <p class="card-text"><%= @gossip.content %></p>
-		    <p class="card-text">
-		    	<% @user_id = @gossip.user.id %>
-		    	<%= link_to 'De ' + @gossip.user.first_name +  ' ' + @gossip.user.last_name, 
-		    	user_path(@user_id) %><br />
 
-		    	<%= @gossip.created_at.strftime('%d/%m/%Y  -  %H:%M ') + ' à ' %>
-		    	<%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id), class: 'text-dark text-decoration-none' %>
-		    </p>
+	<div class='pt-5 row'>
+		<div class='pt-5 col-md-10 offset-md-1'>
+			<div class="card">
+			  <div class="h4 card-header">
+			    <%= @gossip.title %> 
+			  </div>
+			  <div class="card-body">
+			    <p class="card-text"><%= @gossip.content %></p>
+			    <p class="card-text">
+			    	<% @user_id = @gossip.user.id %>
+			    	<%= link_to 'De ' + @gossip.user.first_name +  ' ' + @gossip.user.last_name, 
+			    	user_path(@user_id) %><br />
 
-		    <p class="card-text text-info">
-		    	<% @gossip.tags.each do |tag| %>
-	    				#<%= tag.title %>
-	    		<% end %>
-	    	</p>
-		  </div>
+			    	<%= @gossip.created_at.strftime('%d/%m/%Y  -  %H:%M ') + ' à ' %>
+			    	<%= link_to @gossip.user.city.name, city_path(@gossip.user.city.id), class: 'text-dark text-decoration-none' %>
+			    </p>
+
+			    <p class="card-text text-info">
+			    	<% @gossip.tags.each do |tag| %>
+		    				#<%= tag.title %>
+		    		<% end %>
+		    	</p>
+			  </div>	  
+			</div>
 		</div>
 	</div>
+	<div class='row pt-3'>
+		<div class='col-2 offset-md-1'>
+		  <%= link_to "Editer", edit_gossip_path(@gossip.id), class: "btn btn-primary btn-block rounded-pill" %>
+		</div>
+		<div class='col-2'>
+		  <a href="<%= gossip_path(@gossip.id) %>" class='btn btn-danger btn-block rounded-pill' data-confirm='êtes-vous- sur ?'
+       data-method="DELETE">Supprimer</a>
+		</div>
+	</div>
+
+	<div class='row pt-5 justify-content-center'>
+		<div class='col-8'>
+			<p class='h4 pb-2 text-white'>Commentaires</p>
+		<div class="list-group">
+			<% @gossip.comments.reverse.each do |c| %>
+	  		<div class="list-group-item flex-column align-items-start">
+			    <div class="d-flex w-100 justify-content-between">
+			      <h6 class="mb-1"><%= 'De ' + c.user.first_name + " " + c.user.last_name %></h6>
+			      <small><%= c.created_at.strftime('%d/%m/%Y  -  %H:%M ') %></small>
+			    </div>
+			    <div class='pb-3'>
+			    	<%= c.content %>
+			    </div>
+			    <div class='border-top border-light'>
+			    	<%= link_to "Editer", edit_gossip_comment_path(@gossip.id, c.id), class: "btn btn-default text-primary" %>
+			    	
+			    </div>
+			  </div>
+			<% end %>
+
+		</div>
+
+
+			<%= form_for [@gossip, @comment] do |f| %>
+				<div class='pb-3 form-group'>
+					<%= f.text_field :content, class:'form-control', placeholder:'Ajoute ton commentaire' %>
+				</div>
+
+				<div class='form-group'>
+					<button type='submit' class="btn btn-primary btn-block px-5">Comment</button>
+				</div>
+			<% end %>
+		</div>
+	</div>
+	
 </div>
+

@@ -29,3 +29,5 @@ end
 	g = Gossip.create!(title: Faker::Lorem.sentence(word_count: 2), content: Faker::Lorem.sentence(word_count: 30), user: User.find(rand(User.first.id..User.last.id)), tags: [Tag.find(rand(Tag.first.id..Tag.last.id)), Tag.find(rand(Tag.first.id..Tag.last.id))])	
 	Comment.create!(content: Faker::Lorem.paragraph(sentence_count: 2), user: User.all.sample, gossip: g)
 end
+
+User.create!(first_name: 'anonymous', last_name: "anonymous", description: "unknow", email: "unknow", age: 0, city: City.all.sample)

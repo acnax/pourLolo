@@ -3,17 +3,20 @@
         	<p class='h2 text-white'>Salut <%= @first_name %>, voici les derniers <span class='text-primary'>potins</span></p>  
     </div>
 
-    <div class='row justify-content-center'>
-        <div class='mt-5 col-3'>
-            <div class='d-flex justify-content-center'>
-                <%= link_to "Creer un Gossip", new_gossip_path, class: "btn btn-primary btn-lg text-white rounded-pill" %>
-            </div>
+    <div class='row border-bottom border-primary'>   
+        <div class='col-md-8 offset-md-2 pb-4'>
+                <%= link_to "Creer un Gossip", new_gossip_path, class: "btn btn-primary btn-lg btn-block text-white rounded-pill" %>
         </div>
-        <div class='col-7 mb-5 pl-5 border-left border-info'>
+    </div>
+    <div class='row'>  
+        <div class='col-md-8 offset-md-2 border-info'>
         	<% @gossip.each do |gossip| %>
-        		<div class="card mt-5 border-primary rounded-lg" >
+        		<div class="card mt-4 border-primary rounded-lg" >
           			<div class="card-body">
+                        <div class='d-flex justify-content-between'>
             			<h5 class="card-title"><%= gossip.title %></h5>
+                        <div class='border rounded-circle bg-primary text-white text-center' style="width: 30px; height: 30px;"><%= link_to gossip.comments.count,  gossip_path(gossip.id), class: 'text-white' %></div>
+                        </div>
             			<p class="card-text">From <%= gossip.user.first_name %>, <%= gossip.user.last_name %><br/>
             			<span class='text-info'>			
             			<% gossip.tags.each do |tag| %>
@@ -21,9 +24,11 @@
             			<% end %>
             			</span>
             			</p>
-            			
-            			<%= link_to "la suite", gossip_path(gossip.id), class: "btn btn-primary text-white rounded-pill" %>
-          			</div>
+            			<%= link_to "Lire la suite", gossip_path(gossip.id), class: "btn btn-primary text-white rounded-pill" %>
+                        <%= link_to "Editer", edit_gossip_path(gossip.id), class: "btn btn-default text-primary" %>
+                           
+                        
+                    </div>
         		</div>
 
         	<% end %>

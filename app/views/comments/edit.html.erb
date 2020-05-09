@@ -1,0 +1,33 @@
+<div class='container '>
+
+
+	<div class='mt-5 pb-2 border-bottom border-primary'>	
+			<span class='h1 text-white'>Edite ton commentaire</span>
+	</div>
+
+	<div class='my-5'>
+
+		<%= form_for [@gossip, @comment] do |f| %>
+			<div class='pb-3 form-group'>
+				<%= f.text_field :content, class:'form-control' %>
+			</div>
+			
+			<div class='form-group pt-3'>
+				<div class='row'>
+					<div class='col-2'>
+						<button type='submit' class="btn btn-block btn-primary rounded-pill">Edit</button>
+					</div>
+					<div class='col-2'>
+					 <a href="<%= gossip_comment_path(@gossip.id, @comment.id) %>" class='btn btn-danger btn-block rounded-pill' data-confirm='êtes-vous- sur ?' data-method="DELETE">Supprimer</a>
+					</div>
+				</div>
+			</div>
+
+
+		<% end %>
+		
+	</div>
+
+
+
+</div>
