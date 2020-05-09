@@ -18,7 +18,7 @@ class GossipsController < ApplicationController
 	def create
 		@gossip = Gossip.new('title' => params[:title],
 													'content' => params[:content],
-													'user_id' => 11) # avec xxx qui sont les données obtenues à partir du formulaire
+													'user_id' => current_user.id) # avec xxx qui sont les données obtenues à partir du formulaire
 
   	if @gossip.save # essaie de sauvegarder en base @gossip
 

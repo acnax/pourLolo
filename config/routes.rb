@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
 	resources :cities
 
+	resources :sessions, only: [:new, :create, :destroy]
+
 	#get '/welcome(/:first_name)', to: "dynamic_pages#welcome", as: 'welcome'
 
 	#get '/gossip/:gossip_id', to: "dynamic_pages#show", as: 'show'

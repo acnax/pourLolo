@@ -23,9 +23,6 @@
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <a class="navbar-brand px-5" href="<%= gossips_path %>"><i class="fas fa-lg fa-user-circle pr-3"></i>The Gossip Project</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -36,6 +33,27 @@
             <a class="nav-link pr-4" href="<%= contact_path %>">Contact</a>
           </li>
         </ul>
+        <% if current_user %>
+          <ul class="navbar-nav mr-4">
+            <li class="nav-item "> 
+                <%= link_to "Se déconnecter", session_path(session.id), method: :delete , class:"text-white" %>
+            </li>
+         </ul>
+
+        <% else %>
+          <ul class="navbar-nav mr-4">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login / logout
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="<%= new_user_path %>">S'inscrire</a>
+                <a class="dropdown-item" href="<%= new_session_path %>">Se connecter</a>
+              </div>
+            </li>
+         
+          </ul>
+        <% end %>
       </div>
 
     </nav>
