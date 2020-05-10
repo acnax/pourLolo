@@ -21,7 +21,7 @@ ActiveRecord::Base.connection.execute("TRUNCATE comments RESTART IDENTITY CASCAD
 
 10.times do |index|
 	City.create!(name: Faker::Address.city, zip_code: Faker::Address.zip_code)
-	User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Lorem.sentence(word_count: 10), email: Faker::Internet.email, age: Faker::Number.between(from: 1, to: 80), city: City.all.sample, password: Faker::Lorem.sentence(word_count: 10))
+	User.create!(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, description: Faker::Lorem.sentence(word_count: 10), email: Faker::Internet.email, age: Faker::Number.between(from: 1, to: 80), city: City.all.sample, password: 'eingerziogn')
 	Tag.create!(title: Faker::Book.genre)
 end
 
