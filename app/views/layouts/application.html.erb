@@ -68,6 +68,13 @@
               <%= flash[:success] %>
           </div>
         </div>
+        <% elsif flash[:danger] %>
+        <div class='px-5 pt-3'>
+          <div class="alert alert-danger">
+            <button type='button' class='close' data-dismiss='alert'>&times;</button>
+              <%= flash[:danger] %>
+          </div>
+        </div>
         <% end %>
       
 

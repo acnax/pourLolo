@@ -26,15 +26,17 @@
 			</div>
 		</div>
 	</div>
-	<div class='row pt-3'>
-		<div class='col-2 offset-md-1'>
-		  <%= link_to "Editer", edit_gossip_path(@gossip.id), class: "btn btn-primary btn-block rounded-pill" %>
+	<% if current_user && current_user.id == @gossip.user_id %>
+		<div class='row pt-3'>
+			<div class='col-2 offset-md-1'>
+			  <%= link_to "Editer", edit_gossip_path(@gossip.id), class: "btn btn-primary btn-block rounded-pill" %>
+			</div>
+			<div class='col-2'>
+			  <a href="<%= gossip_path(@gossip.id) %>" class='btn btn-danger btn-block rounded-pill' data-confirm='êtes-vous- sur ?'
+	       data-method="DELETE">Supprimer</a>
+			</div>
 		</div>
-		<div class='col-2'>
-		  <a href="<%= gossip_path(@gossip.id) %>" class='btn btn-danger btn-block rounded-pill' data-confirm='êtes-vous- sur ?'
-       data-method="DELETE">Supprimer</a>
-		</div>
-	</div>
+	<% end %>
 
 	<div class='row pt-5 justify-content-center'>
 		<div class='col-8'>
@@ -49,23 +51,30 @@
 			    <div class='pb-3'>
 			    	<%= c.content %>
 			    </div>
-			    <div class='border-top border-light'>
-			    	<%= link_to "Editer", edit_gossip_comment_path(@gossip.id, c.id), class: "btn btn-default text-primary" %>
-			    	
-			    </div>
+			    <% if current_user && current_user.id == c.user_id %>
+				    <div class='border-top border-light'>
+				    	<%= link_to "Editer", edit_gossip_comment_path(@gossip.id, c.id), class: "btn btn-default text-primary" %>
+				    	
+				    </div>
+				  <% end %>
 			  </div>
 			<% end %>
 
 		</div>
 
+			<% if current_user  %>
+				<%= form_for [@gossip, @comment] do |f| %>
+					<div class='pb-3 form-group'>
+						<%= f.text_field :content, class:'form-control', placeholder:'Ajoute ton commentaire' %>
+					</div>
 
-			<%= form_for [@gossip, @comment] do |f| %>
-				<div class='pb-3 form-group'>
-					<%= f.text_field :content, class:'form-control', placeholder:'Ajoute ton commentaire' %>
-				</div>
-
-				<div class='form-group'>
-					<button type='submit' class="btn btn-primary btn-block px-5">Comment</button>
+					<div class='form-group'>
+						<button type='submit' class="btn btn-primary btn-block px-5">Comment</button>
+					</div>
+				<% end %>
+			<% else %>
+				<div class="mt-3 alert alert-warning" role="alert">
+  				Pour laisser un com <a href="<%= new_session_path %>" class="alert-link">connecte toi</a>
 				</div>
 			<% end %>
 		</div>

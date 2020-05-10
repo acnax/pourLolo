@@ -1,5 +1,6 @@
 class GossipsController < ApplicationController
-
+	before_action :authenticate_user, only: [:new, :create]
+	
 
 	def index
 		@first_name = params[:first_name]

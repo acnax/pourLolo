@@ -1,6 +1,6 @@
 <div class='container'>
     <div class='row px-5 py-4 mb-3'>
-        	<p class='h2 text-white'>Salut <% if current_user %><%= ' ' + current_user.first_name  %><% end %>, voici les derniers <span class='text-primary'>potins</span></p>  
+        	<p class='h2 text-white'>Salut<% if current_user %><%= ' ' + current_user.first_name  %><% end %>, voici les derniers <span class='text-primary'>potins</span></p>  
     </div>
 
     <div class='row border-bottom border-primary'>   
@@ -25,8 +25,9 @@
             			</span>
             			</p>
             			<%= link_to "Lire la suite", gossip_path(gossip.id), class: "btn btn-primary text-white rounded-pill" %>
-                        <%= link_to "Editer", edit_gossip_path(gossip.id), class: "btn btn-default text-primary" %>
-                           
+                        <% if current_user && current_user.id == gossip.user_id %>
+                            <%= link_to "Editer", edit_gossip_path(gossip.id), class: "btn btn-default text-primary" %>
+                        <% end %>
                         
                     </div>
         		</div>
