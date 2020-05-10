@@ -17,6 +17,8 @@ ActiveRecord::Base.connection.execute("TRUNCATE cities RESTART IDENTITY CASCADE"
 ActiveRecord::Base.connection.execute("TRUNCATE gossips RESTART IDENTITY CASCADE")
 ActiveRecord::Base.connection.execute("TRUNCATE tags RESTART IDENTITY CASCADE")
 ActiveRecord::Base.connection.execute("TRUNCATE comments RESTART IDENTITY CASCADE")
+ActiveRecord::Base.connection.execute("TRUNCATE gossips_tags RESTART IDENTITY CASCADE")
+
 
 
 10.times do |index|
@@ -26,6 +28,10 @@ ActiveRecord::Base.connection.execute("TRUNCATE comments RESTART IDENTITY CASCAD
 end
 
 20.times do
-	g = Gossip.create!(title: Faker::Lorem.sentence(word_count: 2), content: Faker::Lorem.sentence(word_count: 30), user: User.find(rand(User.first.id..User.last.id)), tags: [Tag.find(rand(Tag.first.id..Tag.last.id)), Tag.find(rand(Tag.first.id..Tag.last.id))])	
-	Comment.create!(content: Faker::Lorem.paragraph(sentence_count: 2), user: User.all.sample, gossip: g)
+	
+	Gossip.create!(title: Faker::Book.title, content: Faker::ChuckNorris.fact, user: User.all.sample, tags: Tag.all.sample(rand(1..4)))	
+end
+
+30.times do
+	Comment.create!(content: Faker::Movie.quote, user: User.all.sample, gossip: Gossip.all.sample)
 end

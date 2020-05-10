@@ -35,11 +35,15 @@ class GossipsController < ApplicationController
 
 	def update
 		@gossip = Gossip.find(params[:id])
-		gossip_params = params.require(:gossip).permit(:title, :content)
-		if @gossip.update(gossip_params)
-			redirect_to gossip_path(@gossip.id), success: 'Edition Valide !'
+		if current_user.id == @gossip.user.id
+			gossip_params = params.require(:gossip).permit(:title, :content)
+			if @gossip.update(gossip_params)
+				redirect_to gossip_path(@gossip.id), success: 'Edition Valide !'
+			else
+				render :edit
+			end
 		else
-			render :edit
+			redirect_to gossip_path(@gossip.id), danger: "pas d'edition"
 		end
 
 	end

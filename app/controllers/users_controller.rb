@@ -14,7 +14,8 @@ class UsersController < ApplicationController
 		@user = User.new(user_params) 
 		@user.city = City.all.sample
 
-  	if @user.save 
+  	if @user.save
+  		log_in(@user)                                     
    		redirect_to gossips_path, success: "you're register"
 		end
 	end
