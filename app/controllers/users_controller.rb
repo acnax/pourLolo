@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
 	def create
 		user_params = params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
-		@user = User.new(user_parau.errorsms) 
+		@user = User.new(user_params) 
 		@user.city = City.all.sample
 
   	if @user.save 
